@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi_gaston"
+version = "0.0.1"
+authors = [
+  { name="Clover Zheng", email="sz6116@princeton.edu" },
+  { name="Uthsav Chitra", email="uchitra@princeton.edu" },
+  { name="Cong Ma", email="congma@princeton.edu" },
+  { name="Ben Raphael", email="braphael@cs.princeton.edu" },
+]
+description = "Multi-GASTON"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/raphael-group/Multi-GASTON"
+
