@@ -3,11 +3,13 @@
 Multi-GASTON is an unsupervised deep learning model that learns multiple spatial gradients simoutaineously from spatially resolved data such as spatial metabolomics and spatially-resolved transcriptomics (SRT). It is an extension of GASTON (https://pmc.ncbi.nlm.nih.gov/articles/PMC10592770/), which was designed for SRT data and learns a single _topographic map_ of a 2-D tissue slice in terms of a 1-D coordinate called _isodepth_, where all genes can be expressed as a function of this isodepth. Now allowing metabolites or genes to follow distinct spatial patterns, Multi-GASTON captures the metabolite abundance or gene expression topography by learning _k distinct isodepths_, that smoothly vary across a tissue slice and capture spatial organizations of different groups of spatially variable metabolites or genes.
 
 <p align="center">
-<img src="https://github.com/raphael-group/Multi-GASTON/tree/main/plots/NNarchitecture.png?raw=true" height=400/>
+<img src="plots/NNarchitecture.png" height=400/>
 </p>
 
 ## Installation
-TO BE CHANGED
+```
+python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps multi_gaston
+```
 
 ## Software dependencies
 * torch (=2.0.0)

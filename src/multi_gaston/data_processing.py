@@ -28,13 +28,13 @@ def process(file_dir, plot = True, save_dir = None):
     X = int(max(S[:,0])-min(S[:,0]))+1
     Y = int(max(S[:,1])-min(S[:,1]))+1
 
-    if plot == True: 
+    if plot == True and save_dir is not None: 
         os.makedirs(save_dir, exist_ok=True) 
         plt.imshow(A[:,2].reshape((X,Y)), interpolation='nearest')
         plt.xlabel("X")
         plt.ylabel("Y")
         plt.title("Total Ion Count")
-        plt.savefig(save_dir+'/tic.png')
+        plt.savefig(save_dir)
         plt.close()
 
     return X,Y,S,A1
