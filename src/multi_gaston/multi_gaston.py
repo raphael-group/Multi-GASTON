@@ -1,12 +1,10 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.utils
-import torch.distributions
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import numpy as np
-from pos_encoding import positional_encoding
+from multi_gaston.pos_encoding import positional_encoding
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 ##################################################################################
@@ -135,7 +133,7 @@ def train(S, A,
           epochs=1000, batch_size=None, 
           checkpoint=100, SAVE_PATH=None, loss_reduction='mean', 
           optim='sgd', lr=1e-3, weight_decay=0, momentum=0, seed=0, 
-          A_linear = False, lasso_lambda = 0, K = 2,
+          A_linear = False, lasso_lambda = 0, K = 1,
           loss_threshold = 1e-9, 
           schedule='linear',schedule_para=[0.05,12000],
           pos_encoding=False, embed_size=4, sigma=0.1):
@@ -206,7 +204,7 @@ def train(S, A,
     if multi_gaston.pos_encoding:
         S = positional_encoding(S, multi_gaston.embed_size, multi_gaston.sigma)
 
-    loss_function=torch.nn.MSELoss(reduction='none')
+    loss_function=torch.nn.MSELoss(reduction=loss_reduction)
 
     for epoch in range(epochs):
         if epoch%checkpoint==0:
@@ -215,8 +213,8 @@ def train(S, A,
                 torch.save(multi_gaston, SAVE_PATH + f'model_epoch_{epoch}.pt')
                 np.save(SAVE_PATH+'loss_list.npy', loss_list)
                 np.save(SAVE_PATH+'lasso_loss.npy', lasso_loss)
-                radius = multi_gaston.spatial_embedding(S).detach().numpy()
-                np.savetxt(SAVE_PATH+f'{epoch}_radius.txt', radius)
+                isodepth = multi_gaston.spatial_embedding(S).detach().numpy()
+                np.savetxt(SAVE_PATH+f'{epoch}_isodepth.txt', isodepth)
         
         if batch_size is not None:
             # take non-overlapping random samples of size batch_size
@@ -283,8 +281,8 @@ def train(S, A,
         torch.save(multi_gaston, f'{SAVE_PATH}/final_model.pt')
         np.save(f'{SAVE_PATH}/loss_list.npy', loss_list)
         np.save(f'{SAVE_PATH}/lasso_loss.npy', lasso_loss)
-        radius = multi_gaston.spatial_embedding(S).detach().numpy()
-        np.savetxt(f'{SAVE_PATH}/radius.txt', radius)
+        isodepth = multi_gaston.spatial_embedding(S).detach().numpy()
+        np.savetxt(f'{SAVE_PATH}/isodepth.txt', isodepth)
         torch.save(A, f'{SAVE_PATH}/Atorch.pt')
         if multi_gaston.pos_encoding:
             torch.save(S_init, f'{SAVE_PATH}/Storch.pt')
