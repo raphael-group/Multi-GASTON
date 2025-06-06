@@ -12,13 +12,13 @@ import random
 #   percentile_plot: whether to plot the percentile heatmap, useful for small or 
 #       samples with strong spatial gradients e.g. within intestinal villi. only for
 #       multiple isodepth plotting
-def plot_isodepth(isodepth, S, save_dir = '', percentile_plot = False ,show_plot=False):
+def plot_isodepth(isodepth, S, save_dir = '', percentile_plot = False ,show_plot=False,n_contour=7):
     X,Y = int(max(S[:,0])-min(S[:,0])+1),int(max(S[:,1])-min(S[:,1])+1)
     # Single isodepth
     if len(isodepth.shape) == 1:
         plt.figure(figsize=(6/Y*X,6.3))
-        plt.tricontour(S[:,0],S[:,1], isodepth, 7, linewidths=0.5, colors='k')
-        plt.tricontourf(S[:,0],S[:,1], isodepth, 7,cmap='coolwarm')
+        plt.tricontour(S[:,0],S[:,1], isodepth, n_contour, linewidths=0.5, colors='k')
+        plt.tricontourf(S[:,0],S[:,1], isodepth, n_contour,cmap='coolwarm')
         plt.title('Isodepth',fontsize=15,fontweight='demi')
         if len(save_dir)>0: plt.savefig(save_dir+f'/isodepth.png')
         if show_plot: plt.show()

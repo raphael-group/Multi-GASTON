@@ -26,7 +26,7 @@ def process(file_dir, plot = True, save_dir = None):
     S[:,1] = S[:,1] - min(S[:,1]) 
     # Normalize by TIC and then log-transform
     A1 = (A[:,1:] / A[:,0][:,np.newaxis]) * A[:,0].mean()
-    A1[:,1:] = np.log(A1[:,1:]+1)
+    A1 = np.log(A1+1)
 
     X = int(max(S[:,0])-min(S[:,0]))+1
     Y = int(max(S[:,1])-min(S[:,1]))+1
