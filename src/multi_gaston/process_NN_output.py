@@ -229,8 +229,8 @@ def plot_all_crops(whole_slice, crops, bg_met_id, save_dir):
     plt.imshow(vein_mat, interpolation='nearest',alpha=0.6)
     # Plot individual crop isodepths
     for crop in crops:
-        plt.tricontour(crop[:,1],crop[:,0], crop[:,3], 7, linewidths=0.5, colors='k',alpha=0.9)
-        plt.tricontourf(crop[:,1],crop[:,0], crop[:,3], 7, cmap='coolwarm',alpha=0.9)
+        plt.tricontour(crop[:,1],crop[:,0], crop[:,2], 7, linewidths=0.5, colors='k',alpha=0.9)
+        plt.tricontourf(crop[:,1],crop[:,0], crop[:,2], 7, cmap='coolwarm',alpha=0.9)
     plt.xlabel("X",fontsize=13)
     plt.ylabel("Y",fontsize=13)
     plt.title(f'Isodepth from all crops',fontsize=15,fontweight='demi')
