@@ -63,9 +63,9 @@ def plot_mat(data,id,names,save_dir = '', show_plot=True, threshold = -1):
         x = int(row[0])
         y = int(row[1])
         if threshold < 0:
-            mat[x,y] = data[i,3+id]
+            mat[x,y] = data[i,2+id]
         else:
-            if data[i,3+id]>= threshold: mat[x,y] = data[i,3+id]
+            if data[i,2+id]>= threshold: mat[x,y] = data[i,2+id]
     plt.imshow(mat, interpolation='nearest')
     plt.xlabel("X",fontsize=13)
     plt.ylabel("Y",fontsize=13)

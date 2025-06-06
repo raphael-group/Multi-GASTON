@@ -176,8 +176,8 @@ def adjust_isodepth(data, isodepth, names, marker_id, marker_id1,show_plot=False
     # e.g. in murine liver, we use marker metabolite Taurocholic acid so that 
     # it has a negative slope w.r.t. the isodepth, so minimum isodepth corresponds
     # to PN regions.
-    x = isodepth[data[:,3+marker_id]!=0]
-    y = data[:,3+marker_id][data[:,3+marker_id]!=0]
+    x = isodepth[data[:,2+marker_id]!=0]
+    y = data[:,2+marker_id][data[:,2+marker_id]!=0]
     m, b = np.polyfit(x, y, 1)
     if m > 0: isodepth = -isodepth +1
     # Then scale the isodepth
@@ -191,16 +191,16 @@ def adjust_isodepth(data, isodepth, names, marker_id, marker_id1,show_plot=False
         ax1.set_xlabel(f"Isodepth {axis_name}")
         ax1.set_ylabel("Abundance")
         ax1.set_title(f"{names[marker_id][0]} before scaling and adjustment")
-        x = isodepth[data[:,3+marker_id]!=0]
-        y = data[:,3+marker_id][data[:,3+marker_id]!=0]
+        x = isodepth[data[:,2+marker_id]!=0]
+        y = data[:,2+marker_id][data[:,2+marker_id]!=0]
         m, b = np.polyfit(x, y, 1)
         ax2.scatter(x,y,alpha = 2/5)
         ax2.plot(x, m*x+b,color='black',alpha = 3/5)
         ax2.set_xlabel(f"Isodepth {axis_name}")
         ax2.set_ylabel("Abundance")
         ax2.set_title(f"{names[marker_id][0]} after scaling")
-        x = isodepth[data[:,3+marker_id1]!=0]
-        y = data[:,3+marker_id1][data[:,3+marker_id1]!=0]
+        x = isodepth[data[:,2+marker_id1]!=0]
+        y = data[:,2+marker_id1][data[:,2+marker_id1]!=0]
         m, b = np.polyfit(x, y, 1)
         ax3.scatter(x,y,alpha = 2/5)
         ax3.plot(x, m*x+b,color='black',alpha = 3/5)
@@ -225,7 +225,7 @@ def plot_all_crops(whole_slice, crops, bg_met_id, save_dir):
         row = whole_slice[i,:]
         x = int(row[0])
         y = int(row[1])
-        vein_mat[x,y] = whole_slice[i,3+bg_met_id]
+        vein_mat[x,y] = whole_slice[i,2+bg_met_id]
     plt.imshow(vein_mat, interpolation='nearest',alpha=0.6)
     # Plot individual crop isodepths
     for crop in crops:
