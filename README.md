@@ -3,7 +3,7 @@
 Multi-GASTON is a unified and interpretable deep learning framework that learns multiple spatial axes of variation shared across multiple spatially resolved samples of the same tissue, such as spatial transcriptomics (ST) and spatial metabolomics. Multi-GASTON models the latent geometry of a tissue using multiple _tissue-intrinsic coordinates_, where different subsets of genes vary along each tissue-intrinsic coordinate. Specifically, Multi-GASTON models the expression of each gene as a piecewise continuous function of a small number of tissue-intrinsic coordinates, where the pieces correspond to spatial domains and the continuous functions describe continuous variation in expression within each domain along each spatial axis. We note that Multi-GASTON only requires that the different ST samples (or other samples of the same modality) have the same latent geometry, defined by the tissue-intrinsic coordinate system, and does not require the different ST samples to have similar physical geometries (e.g. shape, size, orientation).
 
 <p align="center">
-<img src="plots/Fig1.pnd" height=500/>
+<img src="plots/Fig1.png" height=350/>
 </p>
 
 ## Installation
