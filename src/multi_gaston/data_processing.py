@@ -6,7 +6,7 @@ import torch
 from sklearn import preprocessing
 import anndata as ad
 import scanpy as sc
-
+from zipfile import ZipFile
 
 # Inputs:
 #   file_dir: path to data, as a matrix of size N x (2+G), with the first two
@@ -18,7 +18,7 @@ import scanpy as sc
 #   slices: a list of number of spots in each slice as [N1,..., N_M]
 #   S: array of spatial coordinates, (N_1+...+N_M) x 2
 #   A: array of expression matrix, (N_1+...+N_M) x G
-def load_slices(file_dir, slice_names):
+def load_slices(file_dir, slice_names, if_compressed = False):
     M = len(slice_names)
     if M == 0: 
         print('Need at least 1 sample input!')
@@ -27,7 +27,12 @@ def load_slices(file_dir, slice_names):
     for s in range(M):
         if len(slice_names[s]) == 0: continue
         filename = f'{slice_names[s]}.csv'
-        slice = pd.read_csv(file_dir+filename,header=None).to_numpy()
+        if if_compressed:
+            with ZipFile(file_dir+filename+'.zip', 'r') as zip_file:
+                with zip_file.open(filename) as csv_file:
+                    slice = pd.read_csv(csv_file,header=None).to_numpy()
+        else:
+            slice = pd.read_csv(file_dir+filename,header=None).to_numpy()
         A.append(slice[:,2:])
         # We make sure the 2D coordinates in each slice start with zeros (for 
         # downstream plotting purposes)
@@ -51,7 +56,8 @@ def load_slices(file_dir, slice_names):
 #   n_top_genes: number of top HVGs to find
 # 
 # Output:
-#   slices,S,A (and optionally feature names) after filtering
+#   slices,S,A (and optionally feature names) after filtering, as well as raw
+#   gene expression matrix A_all_genes with filtered spots
 def process_visiumHD(slices,S,A,names=None,min_counts=100,min_cells=50,n_top_genes=1000):
     adata = ad.AnnData(A)
     if names is not None:
