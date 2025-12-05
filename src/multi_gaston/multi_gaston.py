@@ -283,7 +283,7 @@ def train(S, A,
                 torch.save(multi_gaston, SAVE_PATH + f'model_epoch_{epoch}.pt')
                 np.save(SAVE_PATH+'loss_list.npy', loss_list)
                 np.save(SAVE_PATH+'lasso_loss.npy', lasso_loss)
-                np.save(SAVE_PATH+'loss_slices.npy', loss_slices)
+                if M > 1: np.save(SAVE_PATH+'loss_slices.npy', loss_slices)
                 coordinate = torch.zeros((S.shape[0],K))
                 counter = 0
                 for l in range(M):

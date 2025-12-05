@@ -1,3 +1,4 @@
+import os
 import math
 import random
 import numpy as np
@@ -239,14 +240,15 @@ def plot_loss(save_dir, loss_list, lasso_loss = None):
 #   percentile_plot: whether to plot the percentile heatmap, useful for small or 
 #       samples with strong spatial gradients e.g. within intestinal villi. only for
 #       multiple isodepth plotting
-def plot_isodepth(isodepth, S, save_dir = '', percentile_plot = False ,show_plot=False,n_contour=7):
+def plot_isodepth(isodepth, S, save_dir = '', title='Isodepth',
+                  percentile_plot = False ,show_plot=False,n_contour=7):
     X,Y = int(max(S[:,0])-min(S[:,0])+1),int(max(S[:,1])-min(S[:,1])+1)
     # Single isodepth
     if len(isodepth.shape) == 1:
         plt.figure(figsize=(6/Y*X,6.3))
         plt.tricontour(S[:,0],S[:,1], isodepth, n_contour, linewidths=0.5, colors='k')
         plt.tricontourf(S[:,0],S[:,1], isodepth, n_contour,cmap='coolwarm')
-        plt.title('Isodepth',fontsize=15,fontweight='demi')
+        plt.title(title,fontsize=15,fontweight='demi')
         if len(save_dir)>0: plt.savefig(save_dir+f'/isodepth.png')
         if show_plot: plt.show()
         plt.close()
@@ -269,7 +271,7 @@ def plot_isodepth(isodepth, S, save_dir = '', percentile_plot = False ,show_plot
                     elif isodepth1[i] >= t1:vein_mat[x,y] = 0.5
                     else:vein_mat[x,y] = 0.25
                 plt.imshow(vein_mat, cmap='coolwarm', interpolation='nearest')
-                plt.title(f'Isodepth {k}',fontsize=15,fontweight='demi')
+                plt.title(f'{title} {k}',fontsize=15,fontweight='demi')
                 if len(save_dir)>0: plt.savefig(save_dir+f'/isodepth{k}.png')
                 if show_plot: plt.show()
                 plt.close()
@@ -284,16 +286,24 @@ def plot_isodepth(isodepth, S, save_dir = '', percentile_plot = False ,show_plot
                     vein_mat[x,y] = isodepth1[i]
                 plt.imshow(vein_mat, cmap='coolwarm', interpolation='nearest')
                 # plt.contour(vein_mat)
-                plt.title(f'Isodepth {k}',fontsize=15,fontweight='demi')
+                plt.title(f'{title} {k}',fontsize=15,fontweight='demi')
                 if len(save_dir)>0: plt.savefig(save_dir+f'/isodepth{k}.png')
                 if show_plot: plt.show()
                 plt.close()
 
 # Plot the isodepth result from trials, for K=1 isodepth
 def plot_trials(output_dir, save_dir, S, trial_id='unknown'):
+    # Load data and initialize
     X,Y = int(max(S[:,0])-min(S[:,0])+1),int(max(S[:,1])-min(S[:,1])+1)
     loss = np.load(output_dir+'loss_list.npy')[-1]
-    isodepth = np.loadtxt(output_dir+'isodepth.txt')
+    if os.path.exists(output_dir+'isodepth.txt'):
+        isodepth = np.loadtxt(output_dir+'isodepth.txt')
+    elif os.path.exists(output_dir+'coordinate.txt'):
+        isodepth = np.loadtxt(output_dir+'coordinate.txt')
+    else:
+        print(f"'{output_dir}' does not have isodepth result files.")
+        return
+    # Plot
     title=f'Trial {trial_id}: Isodepth'
     save_dir=save_dir+f'/loss{loss:.4g}_trial{trial_id}_isodepth.png'
     plt.figure(figsize=(6/Y*X,6.3))
@@ -305,11 +315,19 @@ def plot_trials(output_dir, save_dir, S, trial_id='unknown'):
 
 # Plot the isodepth result from trials, for K>=2 isodepths
 def plot_trials_multi(output_dir, save_dir, S, trial_id='unknown'):
+    # Load data and initialize
     X,Y = int(max(S[:,0])-min(S[:,0])+1),int(max(S[:,1])-min(S[:,1])+1)
     loss = np.load(output_dir+'loss_list.npy')[-1]
     lasso_loss = np.load(output_dir+'lasso_loss.npy')[-1]
     tru_loss = loss - lasso_loss
-    isodepth = np.loadtxt(output_dir+'isodepth.txt')
+    if os.path.exists(output_dir+'isodepth.txt'):
+        isodepth = np.loadtxt(output_dir+'isodepth.txt')
+    elif os.path.exists(output_dir+'coordinate.txt'):
+        isodepth = np.loadtxt(output_dir+'coordinate.txt')
+    else:
+        print(f"'{output_dir}' does not have isodepth result files.")
+        return
+    # Plot
     title=f'Trial {trial_id}: Isodepth'
     for k in range(isodepth.shape[1]):
         isodepth1 = isodepth[:,k]
