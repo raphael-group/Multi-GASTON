@@ -1,7 +1,8 @@
 # Multi-GASTON
 
-Multi-GASTON is a unified and interpretable deep learning framework that learns multiple spatial axes of variation shared across multiple spatially resolved samples of the same tissue, such as spatial transcriptomics (ST) and spatial metabolomics. Multi-GASTON models the latent geometry of a tissue using multiple _tissue-intrinsic coordinates_, where different subsets of genes vary along each tissue-intrinsic coordinate. Specifically, Multi-GASTON models the expression of each gene as a piecewise continuous function of a small number of tissue-intrinsic coordinates, where the pieces correspond to spatial domains and the continuous functions describe continuous variation in expression within each domain along each spatial axis. 
-We note that Multi-GASTON only requires that the different ST samples (or other samples of the same modality) have the same latent geometry, defined by the tissue-intrinsic coordinate system, and does not require the different ST samples to have similar physical geometries (e.g. shape, size, orientation).
+Multi-GASTON is a unified and interpretable deep learning framework that learns multiple spatial axes of variation shared across multiple spatially resolved samples of the same tissue, such as spatial transcriptomics (ST) and spatial metabolomics. Multi-GASTON models the latent geometry of a tissue using multiple **tissue-intrinsic coordinates**, where different subsets of genes vary along each tissue-intrinsic coordinate. Specifically, Multi-GASTON models the expression of each gene as a piecewise continuous function of a small number of tissue-intrinsic coordinates, where the pieces correspond to _spatial domains_ and the continuous functions describe _continuous variation in expression_ within each domain along each spatial axis. 
+
+We note that Multi-GASTON only requires that the multiple input samples to have the same modality and latent geometry, such as multiple slices of the same tissue or samples sharing the same tissue structure, and DOES NOT require the different samples to be aligned or have similar physical geometries (e.g. shape, size, orientation).
 
 <p align="center">
 <img src="plots/Fig1.png" height=350/>
@@ -23,7 +24,7 @@ The installation should take less than 10 minutes.
 ## Tutorial
 An example application of Multi-GASTON to VisiumHD data of mouse small intestine can be found in `demo/`.
 
-Applications of a preliminary version of Multi-GASTON, restricted to _single sample_ analyses with _linear_ feature functions, to spatial metabolomics data can also be found in https://github.com/raphael-group/MET-MAP, where the method is re-named as Metabolic Topography Mapper, _MET-MAP_ (Samarah, L.Z., Zheng, C., Xing, X. et al. Spatial metabolic gradients in the liver and small intestine. Nature 648, 182–190, 2025).
+Applications of a preliminary version of Multi-GASTON, restricted to _single sample_ analyses with _linear_ feature functions, to spatial metabolomics data can also be found in https://github.com/raphael-group/MET-MAP, where the method is re-named as Metabolic Topography Mapper, _MET-MAP_ (Samarah, L.Z., Zheng, C., Xing, X. et al. Spatial metabolic gradients in the liver and small intestine. _Nature_ 648, 182–190, 2025).
 
 ## Software dependencies
 * torch (=2.0.0)
