@@ -3,7 +3,7 @@
 
 Multi-GASTON learns multiple spatial coordinates of variation shared across multiple spatially-resolved samples of the same tissue, such as spatial transcriptomics (ST) and spatial metabolomics. Specifically, Multi-GASTON models the latent geometry of a tissue using multiple **tissue-intrinsic coordinates**. It allows for the discovery of different subsets of features (e.g. genes, metabolites) that vary along specific spatial coordinates. 
 
-### 🧬 Key Features
+### Key Features
 * **Piecewise Continuity:** Models feature expression as a function of tissue-intrinsic coordinates where pieces correspond to *spatial domains* and functions describe _continuous variation in expression_ within each domain along each spatial axis. 
 * **No Alignment Required:** Multi-GASTON does **not** require samples to be physically aligned. It only requires samples to have the _same_ modality and underlying tissue structure.
 * **Multi-Modal Support:** Applicable to Spatial Transcriptomics (ST), Spatial Metabolomics, and other spatially-resolved data.
@@ -14,7 +14,7 @@ Multi-GASTON learns multiple spatial coordinates of variation shared across mult
 
 ---
 
-## 🚀 Installation
+## Installation
 The installation process typically takes less than 10 minutes.
 1. **Clone and Enter Repository:**
    ```bash
@@ -30,7 +30,7 @@ The installation process typically takes less than 10 minutes.
     pip install -e .
     ```
 
-## 📖 Usage & Tutorials
+## Usage & Tutorials
 
 ### Main Multi-GASTON Demo
 To get started with the current, multi-sample version of the framework, we provide a comprehensive tutorial in the `demo/` directory.
@@ -46,7 +46,7 @@ While Multi-GASTON is the general-purpose framework, a preliminary version was a
 > 
 > **Citation:** Samarah, L.Z., Zheng, C., Xing, X. et al. *Spatial metabolic gradients in the liver and small intestine.* **Nature** 648, 182–190 (2025). [https://doi.org/10.1038/s41586-025-09616-5](https://doi.org/10.1038/s41586-025-09616-5)
 
-## 🛠 Software dependencies
+## Software dependencies
 * torch (=2.0.0)
 * matplotlib (=3.8.0)
 * pandas (=2.1.1)
