@@ -37,15 +37,6 @@ To get started with the current, multi-sample version of the framework, we provi
 * **Dataset:** VisiumHD data of mouse small intestine.
 * **Goal:** Demonstrating shared spatial axes across high-resolution spatial transcriptomics samples.
 
-### Specialized Application: MET-MAP
-While Multi-GASTON is the general-purpose framework, a preliminary version was applied to spatial metabolomics data in our *Nature* publication.
-
-> [!NOTE]
-> **MET-MAP (Metabolic Topography Mapper)**
-> For users interested in reproducing the **single-sample analysis with linear feature functions** as applied to spatial metabolomics data, please refer to the [MET-MAP Repository](https://github.com/raphael-group/MET-MAP).
-> 
-> **Citation:** Samarah, L.Z., Zheng, C., Xing, X. et al. *Spatial metabolic gradients in the liver and small intestine.* **Nature** 648, 182–190 (2025). [https://doi.org/10.1038/s41586-025-09616-5](https://doi.org/10.1038/s41586-025-09616-5)
-
 ## Software dependencies
 * torch (=2.0.0)
 * matplotlib (=3.8.0)
